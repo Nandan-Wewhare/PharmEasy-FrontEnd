@@ -1,10 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" style="margin: 0px 5px 0px 5px">
+  <div class="container-fluid" style="margin: 0px 50px 0px 50px">
     <a class="navbar-brand" href="#">
       <img src="{{ logoUrl }}" alt="" />
     </a>
+    <mat-divider
+      vertical
+      style="height: 30px; margin-right: 20px"
+    ></mat-divider>
     <div class="collapse navbar-collapse">
-      Express delivery to<br />Select Pincode
+      <img
+        src="https://assets.pharmeasy.in/apothecary/images/ic_express%20delivery.svg?dim=16x0"
+      />
+      Express delivery to:<button mat-button>
+        <span style="font-weight: bold">Select Pincode</span>
+      </button>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -27,3 +36,4 @@
     </div>
   </div>
 </nav>
+<hr style="margin-top: 0px" />

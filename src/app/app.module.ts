@@ -7,9 +7,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './modules/material/material.module';
+import { SearchComponent } from './components/search/search.component';
+import { HomeComponent } from './components/home/home.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { CategoriesbannersComponent } from './components/categoriesbanners/categoriesbanners.component';
+import { CategoryTileComponent } from './components/category-tile/category-tile.component';
+import { InfohomeComponent } from './components/infohome/infohome.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SearchComponent,
+    HomeComponent,
+    BannerComponent,
+    CategoriesbannersComponent,
+    CategoryTileComponent,
+    InfohomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
