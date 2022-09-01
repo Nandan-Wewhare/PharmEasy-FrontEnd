@@ -15,6 +15,8 @@ import { CategoryTileComponent } from './components/category-tile/category-tile.
 import { InfohomeComponent } from './components/infohome/infohome.component';
 import { ChooseusComponent } from './components/chooseus/chooseus.component';
 import { ChoosecardComponent } from './components/choosecard/choosecard.component';
+import { ReviewhomeComponent } from './components/reviewhome/reviewhome.component';
+import { ReviewcardComponent } from './components/reviewcard/reviewcard.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ChoosecardComponent } from './components/choosecard/choosecard.componen
     InfohomeComponent,
     ChooseusComponent,
     ChoosecardComponent,
+    ReviewhomeComponent,
+    ReviewcardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<div class="container-fluid" style="margin: 10px 20px 10px 20px">
+  <div class="row">
+    <span style="font-weight: bold; font-size: 16px">{{ reviewer }}</span>
+  </div>
+  <div class="row">
+    <span>{{ reviewDate | date: "mediumDate" }}</span>
+  </div>
+  <div class="row" style="margin-top: 10px">
+    <div
+      class="card"
+      style="width: 22rem; height: 15rem; background-color: #e0f3f2"
+    >
+      <div class="card-body">
+        <p class="card-text" style="line-height: 1.5; text-align: justify">
+          {{ review }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
