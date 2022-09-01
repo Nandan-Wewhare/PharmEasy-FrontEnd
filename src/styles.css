@@ -2,6 +2,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   color: rgb(48, 54, 60);
   margin: 0;
   overflow-x: hidden;

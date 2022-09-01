@@ -61,7 +61,7 @@ export class CategoriesbannersComponent implements OnInit {
       var autoplaySlider = $('#autoplayCategories').lightSlider({
         item: 6,
         auto: false,
-        loop: true,
+        loop: false,
         pauseOnHover: true,
         speed: 500,
         pause: 2000,

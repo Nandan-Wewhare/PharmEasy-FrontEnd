@@ -52,7 +52,7 @@ export class ReviewhomeComponent implements OnInit {
       var autoplaySlider = $('#autoPlayReviews').lightSlider({
         item: 4,
         auto: false,
-        loop: true,
+        loop: false,
         pauseOnHover: true,
         speed: 500,
         pause: 2000,
