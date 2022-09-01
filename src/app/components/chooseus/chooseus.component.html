@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1>Why choose us?</h1>
+  </div>
+  <div class="row">
+    <div *ngFor="let d of data" class="col-lg-3">
+      <app-choosecard
+        [imgUrl]="d.imgUrl"
+        [title]="d.title"
+        [subText1]="d.subText1"
+        [subText2]="d.subText2"
+      ></app-choosecard>
+    </div>
+  </div>
+</div>

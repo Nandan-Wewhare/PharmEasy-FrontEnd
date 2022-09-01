@@ -13,6 +13,8 @@ import { BannerComponent } from './components/banner/banner.component';
 import { CategoriesbannersComponent } from './components/categoriesbanners/categoriesbanners.component';
 import { CategoryTileComponent } from './components/category-tile/category-tile.component';
 import { InfohomeComponent } from './components/infohome/infohome.component';
+import { ChooseusComponent } from './components/chooseus/chooseus.component';
+import { ChoosecardComponent } from './components/choosecard/choosecard.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { InfohomeComponent } from './components/infohome/infohome.component';
     CategoriesbannersComponent,
     CategoryTileComponent,
     InfohomeComponent,
+    ChooseusComponent,
+    ChoosecardComponent,
   ],
   imports: [
     BrowserModule,
