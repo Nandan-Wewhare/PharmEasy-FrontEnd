@@ -17,6 +17,8 @@ import { ChooseusComponent } from './components/chooseus/chooseus.component';
 import { ChoosecardComponent } from './components/choosecard/choosecard.component';
 import { ReviewhomeComponent } from './components/reviewhome/reviewhome.component';
 import { ReviewcardComponent } from './components/reviewcard/reviewcard.component';
+import { CategorydetailComponent } from './components/categorydetail/categorydetail.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { ReviewcardComponent } from './components/reviewcard/reviewcard.componen
     ChoosecardComponent,
     ReviewhomeComponent,
     ReviewcardComponent,
+    CategorydetailComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
