@@ -15,13 +15,9 @@
       </mat-form-field>
     </div>
   </div>
-  <div
-    class="row"
-    *ngFor="let product of productsInCategory"
-    style="margin: 10px 0px 10px 0px"
-  >
-    <div class="col-lg-4"><app-product [product]="product"></app-product></div>
-    <div class="col-lg-4"><app-product [product]="product"></app-product></div>
-    <div class="col-lg-4"><app-product [product]="product"></app-product></div>
+  <div class="row" style="margin: 10px 0px 10px 5%">
+    <div class="col-lg-4" *ngFor="let product of productsInCategory">
+      <app-product [product]="product"></app-product>
+    </div>
   </div>
 </div>

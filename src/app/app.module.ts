@@ -19,6 +19,7 @@ import { ReviewhomeComponent } from './components/reviewhome/reviewhome.componen
 import { ReviewcardComponent } from './components/reviewcard/reviewcard.component';
 import { CategorydetailComponent } from './components/categorydetail/categorydetail.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProductComponent } from './components/product/product.component';
     ReviewcardComponent,
     CategorydetailComponent,
     ProductComponent,
+    ProductdetailComponent,
   ],
   imports: [
     BrowserModule,
