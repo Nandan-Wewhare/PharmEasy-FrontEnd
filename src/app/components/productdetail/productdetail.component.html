@@ -1,1 +1,32 @@
-<p>productdetail works!</p>
+<div class="row">
+  <div class="col-lg-2">
+    <div class="card" style="width: 15rem">
+      <img src="{{ product.images[0] }}" class="card-img-top" />
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="row">
+      <h5>{{ product.name }}</h5>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <mat-icon *ngFor="let star of [].constructor(product.avgRating)"
+          >star</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="row d-flex justify-content-center">
+      <button mat-raised-button color="accent" style="width: 30%">
+        <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+      </button>
+    </div>
+    <br />
+    <div class="row d-flex justify-content-center">
+      <button mat-raised-button color="accent" style="width: 30%">
+        <mat-icon>chevron_right</mat-icon> View Cart
+      </button>
+    </div>
+  </div>
+</div>

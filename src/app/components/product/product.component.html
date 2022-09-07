@@ -1,64 +1,66 @@
-<div
-  class="card"
-  style="width: 20rem; height: 24rem; margin: 10px 0px 10px 0px"
->
-  <img
-    src="{{ product.images[0] }}"
-    class="card-img-top"
-    height="150px"
-    width="150px"
-    style="object-fit: contain; margin: 10px 0px 10px 0px"
-  />
-  <div class="card-body">
-    <h5
-      class="card-title"
-      style="
-        font-size: 16px;
-        font-weight: bold;
-        text-align: justify;
-        line-height: 1.5rem;
-      "
-    >
-      {{ product.name }}
-    </h5>
-    <div class="card-text">
-      <span
-        style="font-size: 14px; margin-top: 10px"
-        [ngStyle]="{
-          'text-decoration': product.discount > 0 ? 'line-through' : 'none'
-        }"
+<a routerLink="/product/{{ product.__id }}" style="text-decoration: none">
+  <div
+    class="card"
+    style="width: 20rem; height: 24rem; margin: 10px 0px 10px 0px"
+  >
+    <img
+      src="{{ product.images[0] }}"
+      class="card-img-top"
+      height="150px"
+      width="150px"
+      style="object-fit: contain; margin: 10px 0px 10px 0px"
+    />
+    <div class="card-body">
+      <h5
+        class="card-title"
+        style="
+          font-size: 16px;
+          font-weight: bold;
+          text-align: justify;
+          line-height: 1.5rem;
+        "
       >
-        ₹ {{ product.price }}
-      </span>
-      <div>
-        <img
-          src="https://assets.pharmeasy.in/web-assets/_next/icons/pdp-discount.png"
-          style="position: absolute; margin-top: 10px; left: 0; top: 0"
-          width="30%"
-          height="7%"
-        />
+        {{ product.name }}
+      </h5>
+      <div class="card-text">
         <span
-          style="
-            font-weight: bold;
-            z-index: 100;
-            position: absolute;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            left: 0;
-            top: 10px;
-            margin-top: 1%;
-          "
-          >{{ product.discount }}% OFF</span
+          style="font-size: 14px; margin-top: 10px"
+          [ngStyle]="{
+            'text-decoration': product.discount > 0 ? 'line-through' : 'none'
+          }"
         >
+          ₹ {{ product.price }}
+        </span>
+        <div>
+          <img
+            src="https://assets.pharmeasy.in/web-assets/_next/icons/pdp-discount.png"
+            style="position: absolute; margin-top: 10px; left: 0; top: 0"
+            width="30%"
+            height="7%"
+          />
+          <span
+            style="
+              font-weight: bold;
+              z-index: 100;
+              position: absolute;
+              color: white;
+              font-size: 14px;
+              font-weight: bold;
+              left: 0;
+              top: 10px;
+              margin-top: 1%;
+            "
+            >{{ product.discount }}% OFF</span
+          >
+        </div>
       </div>
+      <p
+        *ngIf="product.discount > 0"
+        class="card-text"
+        style="font-size: 14px; font-weight: bold; margin-top: 10px"
+      >
+        ₹ {{ product.price - (product.price * product.discount) / 100 }}
+      </p>
     </div>
-    <p
-      *ngIf="product.discount > 0"
-      class="card-text"
-      style="font-size: 14px; font-weight: bold; margin-top: 10px"
-    >
-      ₹ {{ product.price - (product.price * product.discount) / 100 }}
-    </p>
   </div>
-</div>
+</a>

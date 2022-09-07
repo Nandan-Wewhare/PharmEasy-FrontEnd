@@ -8,7 +8,7 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['./categorydetail.component.css'],
 })
 export class CategorydetailComponent implements OnInit {
-  @Input() categoryId!: string;
+  categoryId!: string;
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
