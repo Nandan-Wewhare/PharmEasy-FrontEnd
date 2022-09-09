@@ -31,7 +31,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -45,7 +47,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -59,7 +63,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -73,7 +79,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -87,7 +95,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -101,7 +111,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -115,7 +127,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
     new Product(
       '1',
@@ -129,7 +143,9 @@ export class CategorydetailComponent implements OnInit {
       310,
       '2',
       15,
-      3.5
+      3.5,
+      'Saffola',
+      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
     ),
   ];
 

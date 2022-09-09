@@ -22,7 +22,9 @@ export class ProductdetailComponent implements OnInit {
     310,
     '2',
     15,
-    3
+    3,
+    'Saffola',
+    'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
   );
 
   constructor(private activatedRoute: ActivatedRoute) {}

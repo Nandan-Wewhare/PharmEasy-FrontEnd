@@ -1,32 +1,109 @@
-<div class="row">
-  <div class="col-lg-2">
-    <div class="card" style="width: 15rem">
-      <img src="{{ product.images[0] }}" class="card-img-top" />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="card" style="width: 15rem; padding: 10px">
+        <img src="{{ product.images[0] }}" class="card-img-top" />
+      </div>
     </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="row">
-      <h5>{{ product.name }}</h5>
-    </div>
-    <div class="row">
-      <div class="col-lg-3">
-        <mat-icon *ngFor="let star of [].constructor(product.avgRating)"
-          >star</mat-icon
+    <div class="col-lg-6">
+      <div class="row">
+        <h5>{{ product.name }}</h5>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <mat-icon *ngFor="let star of [].constructor(product.avgRating)"
+            >star</mat-icon
+          >
+        </div>
+      </div>
+      <div class="row">
+        <span style="font-weight: bold; font-size: 16px"
+          >MRP:
+          {{ product.price - (product.price * product.discount) / 100 }}</span
         >
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <img
+            src="https://assets.pharmeasy.in/web-assets/_next/icons/pdp-discount.png"
+            width="80px"
+          />
+          <span
+            style="
+              font-weight: bold;
+              z-index: 100;
+              position: absolute;
+              color: white;
+              font-size: 14px;
+              font-weight: bold;
+              left: 17.5%;
+              top: 28%;
+            "
+            >{{ product.discount }}% OFF</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row d-flex justify-content-center">
+        <button mat-raised-button color="accent" style="width: 30%">
+          <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+        </button>
+      </div>
+      <br />
+      <div class="row d-flex justify-content-center">
+        <button mat-raised-button color="accent" style="width: 30%">
+          <mat-icon>chevron_right</mat-icon> View Cart
+        </button>
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
-    <div class="row d-flex justify-content-center">
-      <button mat-raised-button color="accent" style="width: 30%">
-        <mat-icon>add_shopping_cart</mat-icon> Add to Cart
-      </button>
-    </div>
-    <br />
-    <div class="row d-flex justify-content-center">
-      <button mat-raised-button color="accent" style="width: 30%">
-        <mat-icon>chevron_right</mat-icon> View Cart
-      </button>
+  <br />
+  <div class="row">
+    <hr style="width: 75%; margin: auto auto" />
+    <div style="margin-top: 20px">
+      <h3>Product Details</h3>
+      <br />
+      <p style="text-align: justify">{{ product.description }}</p>
+      <span style="font-weight: bold">Brand: </span>
+      <span>{{ product.brand }}</span> <br />
+      <span style="font-weight: bold">Manufacturer: </span>
+      <span> {{ product.manufacturer }}</span>
     </div>
   </div>
+  <hr style="margin-bottom: 0px; margin-left: auto; margin-right: auto" />
+  <div class="row" style="background-color: beige; margin: 0px; padding: 10px">
+    <div class="col-lg-4">
+      <mat-icon color="accent" style="font-size: 24px">verified</mat-icon>
+      <p style="font-weight: bold; letter-spacing: 0.5px; font-size: 18px">
+        1 Lakh+ products
+      </p>
+      <p style="text-align: justify">
+        We maintain strict quality controls on all our partner retailers, so
+        that you always get standard quality products.
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <mat-icon color="accent" style="font-size: 24px">verified_user</mat-icon>
+      <p style="font-weight: bold; letter-spacing: 0.5px; font-size: 18px">
+        Secure Payment
+      </p>
+      <p style="text-align: justify">
+        100% secure and trusted payment protection.
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <mat-icon color="accent" style="font-size: 24px"
+        >event_available</mat-icon
+      >
+      <p style="font-weight: bold; letter-spacing: 0.5px; font-size: 18px">
+        Easy Return
+      </p>
+      <p style="text-align: justify">
+        We have a new and dynamic return window policy for medicines and
+        healthcare items. Refer FAQs section for more details.
+      </p>
+    </div>
+  </div>
+  <hr style="margin-top: 0px; margin-left: auto; margin-right: auto" />
 </div>
