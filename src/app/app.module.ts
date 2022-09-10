@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { ReviewcardComponent } from './components/reviewcard/reviewcard.componen
 import { CategorydetailComponent } from './components/categorydetail/categorydetail.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
+import { AuthdialogComponent } from './components/authdialog/authdialog.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,14 @@ import { ProductdetailComponent } from './components/productdetail/productdetail
     CategorydetailComponent,
     ProductComponent,
     ProductdetailComponent,
+    AuthdialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

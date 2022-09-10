@@ -15,3 +15,8 @@ body {
 .mat-icon {
   font-family: "Material Icons" !important;
 }
+
+.dialog-backdrop {
+  background-color: #bbbbbb40;
+  backdrop-filter: blur(4px);
+}

@@ -1,0 +1,78 @@
+<mat-tab-group (selectedTabChange)="changeTab($event)">
+  <mat-tab label="Login">
+    <div mat-dialog-content>
+      <form #authForm="ngForm" style="margin-top: 10px">
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-size: 12px"
+        >
+          <mat-label>10 digit mobile number</mat-label>
+          <input
+            matInput
+            required
+            #phone="ngModel"
+            ngModel
+            name="phone"
+            maxlength="10"
+            minlength="10"
+          />
+          <mat-error *ngIf="phone.touched && phone.value.length < 10"
+            >Invalid phone number</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-size: 12px"
+        >
+          <mat-label>Enter password</mat-label>
+          <input matInput required #pswd="ngModel" ngModel name="pswd" />
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Register">
+    <div mat-dialog-content>
+      <form #authForm="ngForm" style="margin-top: 10px">
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-size: 12px"
+        >
+          <mat-label>10 digit mobile number</mat-label>
+          <input
+            matInput
+            required
+            #phone="ngModel"
+            ngModel
+            name="phone"
+            maxlength="10"
+            minlength="10"
+          />
+          <mat-error *ngIf="phone.touched && phone.value.length < 10"
+            >Invalid phone number</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-size: 12px"
+        >
+          <mat-label>Set a password</mat-label>
+          <input matInput required #pswd="ngModel" ngModel name="pswd" />
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-size: 12px"
+        >
+          <mat-label>Confirm password</mat-label>
+          <input matInput required #cnfPswd="ngModel" ngModel name="cnfPswd" />
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-raised-button color="accent">
+    {{ selectedIndex == 1 ? "Register" : "Login" }}
+  </button>
+</div>
