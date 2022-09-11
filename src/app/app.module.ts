@@ -22,6 +22,7 @@ import { CategorydetailComponent } from './components/categorydetail/categorydet
 import { ProductComponent } from './components/product/product.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 import { AuthdialogComponent } from './components/authdialog/authdialog.component';
+import { PincodedialogComponent } from './components/pincodedialog/pincodedialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AuthdialogComponent } from './components/authdialog/authdialog.componen
     ProductComponent,
     ProductdetailComponent,
     AuthdialogComponent,
+    PincodedialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthdialogComponent } from '../authdialog/authdialog.component';
+import { PincodedialogComponent } from '../pincodedialog/pincodedialog.component';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { AuthdialogComponent } from '../authdialog/authdialog.component';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authDialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -16,7 +17,13 @@ export class HeaderComponent implements OnInit {
     'https://assets.pharmeasy.in/apothecary/images/logo_big.svg?dim=256x0';
 
   openAuthDialog(): void {
-    this.authDialog.open(AuthdialogComponent, {
+    this.dialog.open(AuthdialogComponent, {
+      backdropClass: 'dialog-backdrop',
+    });
+  }
+
+  openPincodeCheckDialog() {
+    this.dialog.open(PincodedialogComponent, {
       backdropClass: 'dialog-backdrop',
     });
   }
