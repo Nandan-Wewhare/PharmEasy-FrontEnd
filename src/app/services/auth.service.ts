@@ -10,14 +10,14 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
   login(phone: string, password: string) {
-    return this.httpClient.post(`${environment.host}/login`, {
+    return this.httpClient.post(`${environment.host}/auth/login`, {
       phone: phone,
       password: password,
     });
   }
 
   register(phone: string, password: string) {
-    return this.httpClient.post(`${environment.host}/register`, {
+    return this.httpClient.post(`${environment.host}/auth/register`, {
       phone: phone,
       password: password,
     });

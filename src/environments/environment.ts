@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  host: 'http://localhost:8080/api/v1',
+  host: 'https://pharmeasyclone.herokuapp.com/api/v1',
 };
