@@ -32,14 +32,19 @@ export class AuthdialogComponent implements OnInit {
       next: (response: any) => {
         this.isLoading = false;
         if (response['status']) {
-          localStorage.setItem(Constants.AUTH_TOKEN, response['token']);
+          this.authService.setLoginData(
+            response['token'],
+            JSON.stringify(response['user'])
+          );
+          this.dialogRef.close();
+          this.snackBar.open('Logged in successfully!', '', { duration: 2000 });
         } else {
           this.snackBar.open(response['message'], '', { duration: 2000 });
         }
       },
       error: (error) => {
         this.isLoading = false;
-        console.log(error);
+        this.snackBar.open(error['error']['message'], '', { duration: 2000 });
       },
     });
   }
@@ -50,14 +55,21 @@ export class AuthdialogComponent implements OnInit {
       next: (response: any) => {
         this.isLoading = false;
         if (response['status']) {
-          localStorage.setItem(Constants.AUTH_TOKEN, response['token']);
+          this.authService.setLoginData(
+            response['token'],
+            JSON.stringify(response['user'])
+          );
+          this.dialogRef.close();
+          this.snackBar.open('Registered successfully!', '', {
+            duration: 2000,
+          });
         } else {
           this.snackBar.open(response['message'], '', { duration: 2000 });
         }
       },
       error: (error) => {
         this.isLoading = false;
-        console.log(error);
+        this.snackBar.open(error['error']['message'], '', { duration: 2000 });
       },
     });
   }

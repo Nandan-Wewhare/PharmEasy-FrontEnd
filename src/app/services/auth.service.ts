@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
 import { Constants } from '../constants';
 
@@ -7,7 +8,8 @@ import { Constants } from '../constants';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  private loggedInUser: any;
+  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {}
 
   login(phone: string, password: string) {
     return this.httpClient.post(`${environment.host}/auth/login`, {
@@ -29,5 +31,17 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(Constants.AUTH_TOKEN);
+    this.snackBar.open('Logged out successfully!', '', { duration: 2000 });
+  }
+
+  getLoggedInUser(): any {
+    return this.loggedInUser != undefined
+      ? JSON.parse(this.loggedInUser)
+      : null;
+  }
+
+  setLoginData(token: string, user: string): void {
+    localStorage.setItem(Constants.AUTH_TOKEN, token);
+    localStorage.setItem(Constants.LOGGED_IN_USER, user);
   }
 }
