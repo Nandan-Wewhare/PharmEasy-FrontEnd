@@ -70,9 +70,20 @@
   </mat-tab>
 </mat-tab-group>
 
-<div mat-dialog-actions align="end">
+<div *ngIf="!isLoading" mat-dialog-actions align="end">
   <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-raised-button color="accent">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="selectedIndex == 1 ? register(authForm) : login(authForm)"
+  >
     {{ selectedIndex == 1 ? "Register" : "Login" }}
   </button>
 </div>
+
+<mat-spinner
+  *ngIf="isLoading"
+  mat-dialog-actions
+  align="end"
+  diameter="30"
+></mat-spinner>

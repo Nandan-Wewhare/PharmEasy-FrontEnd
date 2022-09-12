@@ -23,6 +23,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductdetailComponent } from './components/productdetail/productdetail.component';
 import { AuthdialogComponent } from './components/authdialog/authdialog.component';
 import { PincodedialogComponent } from './components/pincodedialog/pincodedialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PincodedialogComponent } from './components/pincodedialog/pincodedialog
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

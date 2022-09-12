@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 import { AuthdialogComponent } from '../authdialog/authdialog.component';
 import { PincodedialogComponent } from '../pincodedialog/pincodedialog.component';
 
@@ -9,7 +10,7 @@ import { PincodedialogComponent } from '../pincodedialog/pincodedialog.component
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, public authService: AuthService) {}
 
   ngOnInit(): void {}
 
