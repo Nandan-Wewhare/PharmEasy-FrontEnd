@@ -24,6 +24,7 @@ import { ProductdetailComponent } from './components/productdetail/productdetail
 import { AuthdialogComponent } from './components/authdialog/authdialog.component';
 import { PincodedialogComponent } from './components/pincodedialog/pincodedialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
