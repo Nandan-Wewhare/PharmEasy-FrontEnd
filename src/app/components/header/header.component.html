@@ -24,12 +24,12 @@
         </li>
         <li *ngIf="authService.isLoggedIn()" class="nav-item">
           <button mat-button color="secondary">
-            <mat-icon>badge</mat-icon> Welcome
+            <mat-icon>person_outlined</mat-icon> Welcome
             {{
-              authService.getLoggedInUser()["name"] == ""
-                ? authService.getLoggedInUser()["phone"]
-                : authService.getLoggedInUser()["name"]
-            }}!
+              authService.getLoggedInUser()["name"] != ""
+                ? authService.getLoggedInUser()["name"]
+                : authService.getLoggedInUser()["phone"]
+            }}
           </button>
         </li>
         <li *ngIf="authService.isLoggedIn()" class="nav-item">

@@ -9,7 +9,11 @@ import { Constants } from '../constants';
 })
 export class AuthService {
   private loggedInUser: any;
-  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {}
+  private authToken: any;
+
+  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {
+    this.getLoginData();
+  }
 
   login(phone: string, password: string) {
     return this.httpClient.post(`${environment.host}/auth/login`, {
@@ -30,18 +34,26 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(Constants.AUTH_TOKEN);
+    localStorage.clear();
     this.snackBar.open('Logged out successfully!', '', { duration: 2000 });
   }
 
-  getLoggedInUser(): any {
-    return this.loggedInUser != undefined
-      ? JSON.parse(this.loggedInUser)
-      : null;
+  getLoginData(): any {
+    this.loggedInUser = localStorage.getItem(Constants.LOGGED_IN_USER);
+    this.authToken = localStorage.getItem(Constants.AUTH_TOKEN);
   }
 
   setLoginData(token: string, user: string): void {
     localStorage.setItem(Constants.AUTH_TOKEN, token);
     localStorage.setItem(Constants.LOGGED_IN_USER, user);
+    this.getLoginData();
+  }
+
+  getLoggedInUser(): any {
+    return JSON.parse(this.loggedInUser);
+  }
+
+  getAuthToken(): any {
+    return this.authToken;
   }
 }

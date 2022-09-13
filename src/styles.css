@@ -20,3 +20,8 @@ body {
   background-color: #bbbbbb40;
   backdrop-filter: blur(4px);
 }
+
+.mat-simple-snackbar span {
+  margin: auto;
+  text-align: center;
+}

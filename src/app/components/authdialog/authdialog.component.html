@@ -25,14 +25,21 @@
           style="width: 100%; font-size: 12px"
         >
           <mat-label>Enter password</mat-label>
-          <input matInput required #pswd="ngModel" ngModel name="pswd" />
+          <input
+            matInput
+            required
+            #pswd="ngModel"
+            ngModel
+            name="pswd"
+            type="password"
+          />
         </mat-form-field>
       </form>
     </div>
   </mat-tab>
   <mat-tab label="Register">
     <div mat-dialog-content>
-      <form #authForm="ngForm" style="margin-top: 10px">
+      <form #registerForm="ngForm" style="margin-top: 10px">
         <mat-form-field
           appearance="outline"
           style="width: 100%; font-size: 12px"
@@ -56,14 +63,28 @@
           style="width: 100%; font-size: 12px"
         >
           <mat-label>Set a password</mat-label>
-          <input matInput required #pswd="ngModel" ngModel name="pswd" />
+          <input
+            matInput
+            required
+            #pswd="ngModel"
+            ngModel
+            name="pswd"
+            type="password"
+          />
         </mat-form-field>
         <mat-form-field
           appearance="outline"
           style="width: 100%; font-size: 12px"
         >
           <mat-label>Confirm password</mat-label>
-          <input matInput required #cnfPswd="ngModel" ngModel name="cnfPswd" />
+          <input
+            matInput
+            required
+            #cnfPswd="ngModel"
+            ngModel
+            name="cnfPswd"
+            type="password"
+          />
         </mat-form-field>
       </form>
     </div>
@@ -75,15 +96,12 @@
   <button
     mat-raised-button
     color="accent"
-    (click)="selectedIndex == 1 ? register(authForm) : login(authForm)"
+    (click)="selectedIndex == 1 ? register(registerForm) : login(authForm)"
+    [disabled]="selectedIndex == 1 ? !registerForm.valid : !authForm.valid"
   >
     {{ selectedIndex == 1 ? "Register" : "Login" }}
   </button>
 </div>
-
-<mat-spinner
-  *ngIf="isLoading"
-  mat-dialog-actions
-  align="end"
-  diameter="30"
-></mat-spinner>
+<div mat-dialog-actions align="center">
+  <mat-spinner *ngIf="isLoading" diameter="30" color="accent"></mat-spinner>
+</div>

@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { Constants } from 'src/app/constants';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -51,26 +50,31 @@ export class AuthdialogComponent implements OnInit {
 
   register(form: NgForm) {
     this.isLoading = true;
-    this.authService.register(form.value.phone, form.value.pswd).subscribe({
-      next: (response: any) => {
-        this.isLoading = false;
-        if (response['status']) {
-          this.authService.setLoginData(
-            response['token'],
-            JSON.stringify(response['user'])
-          );
-          this.dialogRef.close();
-          this.snackBar.open('Registered successfully!', '', {
-            duration: 2000,
-          });
-        } else {
-          this.snackBar.open(response['message'], '', { duration: 2000 });
-        }
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.snackBar.open(error['error']['message'], '', { duration: 2000 });
-      },
-    });
+    if (form.value.pswd === form.value.cnfPswd) {
+      this.authService.register(form.value.phone, form.value.pswd).subscribe({
+        next: (response: any) => {
+          this.isLoading = false;
+          if (response['status']) {
+            this.dialogRef.close();
+            this.snackBar.open(
+              'Registered successfully! Please login with your credentials now',
+              '',
+              {
+                duration: 2000,
+              }
+            );
+          } else {
+            this.snackBar.open(response['message'], '', { duration: 2000 });
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.snackBar.open(error['error']['message'], '', { duration: 2000 });
+        },
+      });
+    } else {
+      this.isLoading = false;
+      this.snackBar.open('Passwords are not matching', '', { duration: 2000 });
+    }
   }
 }
