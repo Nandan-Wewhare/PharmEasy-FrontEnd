@@ -1,13 +1,10 @@
 <div style="margin: 20px 20px 20px 20px">
   <h4><b>What Our Customers have to Say</b></h4>
   <br />
-  <ul id="autoPlayReviews">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <ul *ngIf="!isLoading" id="autoPlayReviews">
     <li *ngFor="let r of reviews">
-      <app-reviewcard
-        [review]="r.review"
-        [reviewer]="r.reviewer"
-        [reviewDate]="r.reviewDate"
-      ></app-reviewcard>
+      <app-reviewcard [review]="r"></app-reviewcard>
     </li>
   </ul>
 </div>

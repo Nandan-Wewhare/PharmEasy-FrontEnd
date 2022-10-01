@@ -18,7 +18,6 @@ export class CategoriesbannersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllCategories();
     $(document).ready(() => {
       $('#autoplayCategories').lightSlider({
         item: 6,
@@ -29,6 +28,8 @@ export class CategoriesbannersComponent implements OnInit {
         pause: 2000,
       });
     });
+    setTimeout(() => $(window).resize(), 500);
+    this.getAllCategories();
   }
 
   getAllCategories() {
@@ -42,7 +43,6 @@ export class CategoriesbannersComponent implements OnInit {
         } else {
           this.snackBar.open(response['message'], '', { duration: 2000 });
         }
-        console.log(this.categories);
         this.isLoading = false;
       },
       error: (error) => {

@@ -1,27 +1,38 @@
 // To parse this data:
 //
-//   import { Convert, Category } from "./file";
+//   import { Convert, PortalReview } from "./file";
 //
-//   const category = Convert.toCategory(json);
+//   const portalReview = Convert.toPortalReview(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface Category {
+export interface PortalReview {
+  _id: string;
+  reviewer: Reviewer;
+  review: string;
+  createdAt: Date;
+}
+
+export interface Reviewer {
   _id: string;
   name: string;
-  image: string;
+  email: string;
+  passwordHash: string;
+  phone: string;
+  address: string;
+  zip: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-  public static toCategory(json: any): Category {
-    return cast(json, r('Category'));
+  public static toPortalReview(json: string): PortalReview {
+    return cast(json, r('PortalReview'));
   }
 
-  public static categoryToJson(value: Category): string {
-    return JSON.stringify(uncast(value, r('Category')), null, 2);
+  public static portalReviewToJson(value: PortalReview): string {
+    return JSON.stringify(uncast(value, r('PortalReview')), null, 2);
   }
 }
 
@@ -173,11 +184,24 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-  Category: o(
+  PortalReview: o(
+    [
+      { json: '_id', js: '_id', typ: '' },
+      { json: 'reviewer', js: 'reviewer', typ: r('Reviewer') },
+      { json: 'review', js: 'review', typ: '' },
+      { json: 'createdAt', js: 'createdAt', typ: Date },
+    ],
+    false
+  ),
+  Reviewer: o(
     [
       { json: '_id', js: '_id', typ: '' },
       { json: 'name', js: 'name', typ: '' },
-      { json: 'image', js: 'image', typ: '' },
+      { json: 'email', js: 'email', typ: '' },
+      { json: 'passwordHash', js: 'passwordHash', typ: '' },
+      { json: 'phone', js: 'phone', typ: '' },
+      { json: 'address', js: 'address', typ: '' },
+      { json: 'zip', js: 'zip', typ: '' },
     ],
     false
   ),

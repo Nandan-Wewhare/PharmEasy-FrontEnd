@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PortalReview } from 'src/app/models/portal_review.model';
 
 @Component({
   selector: 'app-reviewcard',
@@ -11,8 +12,5 @@ export class ReviewcardComponent implements OnInit {
   ngOnInit(): void {}
 
   @Input()
-  reviewer!: string;
-
-  @Input() reviewDate!: Date;
-  @Input() review!: string;
+  review!: PortalReview;
 }
