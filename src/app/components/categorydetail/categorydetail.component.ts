@@ -38,7 +38,9 @@ export class CategorydetailComponent implements OnInit {
 
   getProductsInCategory() {
     this.httpClient
-      .get(`${environment.host}/products/${this.categoryId}`)
+      .get(
+        `${environment.host}/products/getProductsInCategory/${this.categoryId}`
+      )
       .subscribe({
         next: (response: any) => {
           if (response['status']) {

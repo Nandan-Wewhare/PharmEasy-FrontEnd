@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-2">
       <div class="card" style="width: 15rem; padding: 10px">
-        <img src="{{ product.image }}" class="card-img-top" />
+        <img src="{{ product.image }}" class="card-img-top" height="400rem" />
       </div>
     </div>
     <div class="col-lg-6">
@@ -22,7 +22,7 @@
           {{ product.price - (product.price * product.discount) / 100 }}</span
         >
       </div>
-      <div class="row">
+      <div *ngIf="product.discount > 0" class="row">
         <div class="col-lg-4">
           <img
             src="https://assets.pharmeasy.in/web-assets/_next/icons/pdp-discount.png"
@@ -37,7 +37,7 @@
               font-size: 14px;
               font-weight: bold;
               left: 17.5%;
-              top: 28%;
+              top: 21%;
             "
             >{{ product.discount }}% OFF</span
           >
@@ -52,7 +52,12 @@
       </div>
       <br />
       <div class="row d-flex justify-content-center">
-        <button mat-raised-button color="accent" style="width: 30%">
+        <button
+          mat-raised-button
+          color="accent"
+          style="width: 30%"
+          [disabled]="!authService.isLoggedIn()"
+        >
           <mat-icon>chevron_right</mat-icon> View Cart
         </button>
       </div>
@@ -67,8 +72,6 @@
       <p style="text-align: justify">{{ product.description }}</p>
       <span style="font-weight: bold">Brand: </span>
       <span>{{ product.brand }}</span> <br />
-      <span style="font-weight: bold">Manufacturer: </span>
-      <span> {{ product.brand }}</span>
     </div>
   </div>
   <hr style="margin-bottom: 0px; margin-left: auto; margin-right: auto" />
