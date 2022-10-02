@@ -1,10 +1,13 @@
-<a routerLink="/product/{{ product.__id }}" style="text-decoration: none">
+<a
+  routerLink="/product/{{ product._id }}"
+  style="text-decoration: none; color: black"
+>
   <div
     class="card"
-    style="width: 20rem; height: 24rem; margin: 10px 0px 10px 0px"
+    style="width: 20rem; height: 22rem; margin: 10px 0px 10px 0px"
   >
     <img
-      src="{{ product.images[0] }}"
+      src="{{ product.image }}"
       class="card-img-top"
       height="150px"
       width="150px"
@@ -16,7 +19,7 @@
         style="
           font-size: 16px;
           font-weight: bold;
-          text-align: justify;
+          text-align: center;
           line-height: 1.5rem;
         "
       >
@@ -31,7 +34,7 @@
         >
           ₹ {{ product.price }}
         </span>
-        <div>
+        <div *ngIf="product.discount > 0">
           <img
             src="https://assets.pharmeasy.in/web-assets/_next/icons/pdp-discount.png"
             style="position: absolute; margin-top: 10px; left: 0; top: 0"
@@ -48,7 +51,7 @@
               font-weight: bold;
               left: 0;
               top: 10px;
-              margin-top: 1%;
+              margin-top: 0.5%;
             "
             >{{ product.discount }}% OFF</span
           >
@@ -59,7 +62,12 @@
         class="card-text"
         style="font-size: 14px; font-weight: bold; margin-top: 10px"
       >
-        ₹ {{ product.price - (product.price * product.discount) / 100 }}
+        <!-- {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}: -->
+        ₹
+        {{
+          product.price - (product.price * product.discount) / 100
+            | number: "1.2-2"
+        }}
       </p>
     </div>
   </div>

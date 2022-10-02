@@ -2,13 +2,19 @@
   <div class="row">
     <div class="col-lg-1"></div>
     <div class="col-lg-4" style="margin-top: 1%">
-      <h5><b>Category Name</b></h5>
+      <h5>
+        <b>{{ categoryName }}</b>
+      </h5>
     </div>
     <div class="col-lg-6">
       <mat-form-field appearance="outline" style="font-size: 12px">
         <mat-label>Sort by:</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let option of sortOptions" [value]="option">
+        <mat-select disableOptionCentering="true">
+          <mat-option
+            *ngFor="let option of sortOptions"
+            [value]="option"
+            (onSelectionChange)="sortProducts(option)"
+          >
             {{ option }}
           </mat-option>
         </mat-select>
@@ -16,7 +22,7 @@
     </div>
   </div>
   <div class="row" style="margin: 10px 0px 10px 5%">
-    <div class="col-lg-4" *ngFor="let product of productsInCategory">
+    <div class="col-lg-4" *ngFor="let product of sortedProducts">
       <app-product [product]="product"></app-product>
     </div>
   </div>

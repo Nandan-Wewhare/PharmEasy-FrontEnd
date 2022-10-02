@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product.model';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { Convert, Product } from 'src/app/models/product.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-categorydetail',
@@ -9,149 +12,68 @@ import { Product } from 'src/app/models/product.model';
 })
 export class CategorydetailComponent implements OnInit {
   categoryId!: string;
+  categoryName!: string;
+  isLoading = false;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private httpClient: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.categoryId = params['id'];
     });
+    this.getProductsInCategory();
   }
 
-  productsInCategory: Product[] = [
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-    new Product(
-      '1',
-      'Revital H Men Multivitamin With Calcium, Zinc & Ginseng For Immunity, Strong Bones & Energy (30 Capsules)',
-      [
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-2-1654077741.jpg?dim=320x320&dpr=1&q=100',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-men-multivitamin-with-calcium-zinc-ginseng-for-immunity-strong-bones-energy-30-capsules-3-1654078581.jpg',
-        'https://cdn01.pharmeasy.in/dam/products_otc/270552/revital-h-health-supplement-capsules-bottle-of-30-6.5-1641398825.jpg',
-      ],
-      'Revital H capsule is a unique and balanced combination of 10 vitamins, 9 minerals and ginseng for your daily needs. It gives you the energy to perform your everyday activities, keeps you active and fit. There are variants of this product available that cater to specific needs like the Revital H Woman. Amidst our busy lifestyle, it is critical to keep our health on priority.',
-      310,
-      '2',
-      15,
-      3.5,
-      'Saffola',
-      'MARICO LIMITED Hembros Foods LLP, Plot No. 909, Sector 69, IMT Faridabad, Haryana, 121009 Lic No. 10019064001901'
-    ),
-  ];
+  productsInCategory: Product[] = [];
+  sortedProducts: Product[] = [];
 
   sortOptions: string[] = [
     'Discount',
     'Price low to high',
     'Price high to low',
   ];
+
+  getProductsInCategory() {
+    this.httpClient
+      .get(`${environment.host}/products/${this.categoryId}`)
+      .subscribe({
+        next: (response: any) => {
+          this.isLoading = true;
+          if (response['status']) {
+            this.categoryName = response['category'];
+            response['products'].forEach((product: any) => {
+              this.productsInCategory.push(Convert.toProduct(product));
+            });
+            this.sortedProducts = this.productsInCategory;
+          } else {
+            this.snackBar.open(response['message'], '', { duration: 2000 });
+          }
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.snackBar.open(error['error']['message'], '', { duration: 2000 });
+          this.isLoading = false;
+        },
+      });
+  }
+
+  sortProducts(option: string) {
+    console.log(option);
+    this.sortedProducts = this.productsInCategory;
+    switch (option) {
+      case 'Price high to low':
+        this.sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'Price low to high':
+        this.sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      case 'Discount':
+        this.sortedProducts.sort((a, b) => b.discount - a.discount);
+        break;
+    }
+  }
 }

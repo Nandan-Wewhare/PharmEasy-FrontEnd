@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-2">
       <div class="card" style="width: 15rem; padding: 10px">
-        <img src="{{ product.images[0] }}" class="card-img-top" />
+        <img src="{{ product.image }}" class="card-img-top" />
       </div>
     </div>
     <div class="col-lg-6">
@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-          <mat-icon *ngFor="let star of [].constructor(product.avgRating)"
+          <mat-icon *ngFor="let star of [].constructor(product.rating)"
             >star</mat-icon
           >
         </div>
@@ -68,7 +68,7 @@
       <span style="font-weight: bold">Brand: </span>
       <span>{{ product.brand }}</span> <br />
       <span style="font-weight: bold">Manufacturer: </span>
-      <span> {{ product.manufacturer }}</span>
+      <span> {{ product.brand }}</span>
     </div>
   </div>
   <hr style="margin-bottom: 0px; margin-left: auto; margin-right: auto" />
