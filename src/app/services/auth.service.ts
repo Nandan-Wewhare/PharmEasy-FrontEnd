@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Constants } from '../constants';
 
@@ -11,7 +12,11 @@ export class AuthService {
   private loggedInUser: any;
   private authToken: any;
 
-  constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {
+  constructor(
+    private httpClient: HttpClient,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {
     this.getLoginData();
   }
 
@@ -36,6 +41,7 @@ export class AuthService {
   logout(): void {
     localStorage.clear();
     this.snackBar.open('Logged out successfully!', '', { duration: 2000 });
+    this.router.navigate(['']);
   }
 
   getLoginData(): any {

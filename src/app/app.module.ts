@@ -25,6 +25,8 @@ import { AuthdialogComponent } from './components/authdialog/authdialog.componen
 import { PincodedialogComponent } from './components/pincodedialog/pincodedialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { CartComponent } from './components/cart/cart.component';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { DatePipe } from '@angular/common';
     ProductdetailComponent,
     AuthdialogComponent,
     PincodedialogComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
