@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 export class CategorydetailComponent implements OnInit {
   categoryId!: string;
   categoryName!: string;
-  isLoading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,7 +41,6 @@ export class CategorydetailComponent implements OnInit {
       .get(`${environment.host}/products/${this.categoryId}`)
       .subscribe({
         next: (response: any) => {
-          this.isLoading = true;
           if (response['status']) {
             this.categoryName = response['category'];
             response['products'].forEach((product: any) => {
@@ -52,28 +50,27 @@ export class CategorydetailComponent implements OnInit {
           } else {
             this.snackBar.open(response['message'], '', { duration: 2000 });
           }
-          this.isLoading = false;
         },
-        error: (error) => {
-          this.snackBar.open(error['error']['message'], '', { duration: 2000 });
-          this.isLoading = false;
-        },
+        error: (error) =>
+          this.snackBar.open(error['error']['message'], '', { duration: 2000 }),
       });
   }
 
-  sortProducts(option: string) {
-    console.log(option);
-    this.sortedProducts = this.productsInCategory;
-    switch (option) {
-      case 'Price high to low':
-        this.sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case 'Price low to high':
-        this.sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      case 'Discount':
-        this.sortedProducts.sort((a, b) => b.discount - a.discount);
-        break;
+  sortProducts(option: string, event: any) {
+    if (event.isUserInput) {
+      // to disable calling onSelectionChange twice - for selection and deselection
+      this.sortedProducts = this.productsInCategory;
+      switch (option) {
+        case 'Price high to low':
+          this.sortedProducts.sort((a, b) => b.price - a.price);
+          break;
+        case 'Price low to high':
+          this.sortedProducts.sort((a, b) => a.price - b.price);
+          break;
+        case 'Discount':
+          this.sortedProducts.sort((a, b) => b.discount - a.discount);
+          break;
+      }
     }
   }
 }

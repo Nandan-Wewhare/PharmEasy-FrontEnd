@@ -13,7 +13,7 @@
           <mat-option
             *ngFor="let option of sortOptions"
             [value]="option"
-            (onSelectionChange)="sortProducts(option)"
+            (onSelectionChange)="sortProducts(option, $event)"
           >
             {{ option }}
           </mat-option>
