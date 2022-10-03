@@ -27,9 +27,9 @@
             <mat-icon>person_outlined</mat-icon> Welcome
             {{
               authService.getLoggedInUser()["name"] != ""
-                ? authService.getLoggedInUser()["name"]
+                ? authService.getLoggedInUser()["name"].split(" ")[0]
                 : authService.getLoggedInUser()["phone"]
-            }}
+            }}!
           </button>
         </li>
         <li *ngIf="authService.isLoggedIn()" class="nav-item">

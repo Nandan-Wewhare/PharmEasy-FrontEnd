@@ -2,3 +2,12 @@
   margin-left: 5px;
   margin-right: 10px;
 }
+
+.order-summary {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+li {
+  margin: 10px 0;
+}

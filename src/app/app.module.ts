@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './services/auth.guard';
+import { FeatureBannerComponent } from './components/feature-banner/feature-banner.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AuthGuard } from './services/auth.guard';
     AuthdialogComponent,
     PincodedialogComponent,
     CartComponent,
+    FeatureBannerComponent,
   ],
   imports: [
     BrowserModule,

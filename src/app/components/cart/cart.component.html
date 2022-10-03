@@ -1,21 +1,24 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-1"></div>
+    <!-- Left section -->
+    <div class="col-lg-5">
       <div class="row">
         <div class="col-lg-5">
-          <h3>8 items in cart</h3>
+          <h4>8 items in cart</h4>
         </div>
-        <div class="col-lg-3"></div>
+        <div class="col-lg-4"></div>
         <div class="col-lg-3">
           <small>Prices are indicative</small>
         </div>
       </div>
-      <div class="card mb-4" style="max-width: 540px">
+      <div class="card mb-4" style="width: 100%">
         <div class="row g-0">
           <div class="col-md-4">
             <img
               src="https://cdn01.pharmeasy.in/dam/products/I42604/mesacol-od-tab-15s-2-1641538256.jpg"
               width="150px"
+              style="margin-top: 5px; margin-left: 5px"
             />
           </div>
           <div class="col-md-8">
@@ -52,57 +55,45 @@
           </div>
         </div>
       </div>
-      <div class="card mb-4" style="max-width: 540px">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img
-              src="https://cdn01.pharmeasy.in/dam/products/I42604/mesacol-od-tab-15s-2-1641538256.jpg"
-              width="150px"
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Product title</h5>
-              <p class="card-text">Quantity: 7</p>
-              <div class="row">
-                <div class="col-md-9">
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-success cartBtn"
-                  >
-                    <mat-icon>add</mat-icon>
-                  </button>
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-danger cartBtn"
-                  >
-                    <mat-icon>remove</mat-icon>
-                  </button>
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-warning cartBtn"
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
-                <div class="col-md-3"><b> 2565.35 </b></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <h2><b>Additional Notes</b></h2>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <textarea
+            rows="5"
+            cols="100"
+            matInput
+            placeholder="Enter any additional information regarding your order"
+          ></textarea>
+        </mat-form-field>
+        <ul>
+          <li>
+            A licensed pharmacy would be delivering your order basis
+            availability of product & fastest delivery. Prices are indicative
+            and may change after billing.
+          </li>
+          <li>
+            PharmEasy is a technology platform to connect sellers and buyers and
+            is not involved in sales of any product.
+          </li>
+          <li>
+            Offer for sale on the products and services are provided/sold by the
+            sellers only.
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-2"></div>
+    <!-- Right section -->
+    <div class="col-lg-3">
       <div class="row">
         <!-- deliver to address block -->
         <div style="background-color: rgb(177, 231, 177)" class="d-grid gap-2">
-          Deliver to:<br />Address
+          Deliver to:<br />Address<br />
+          <button mat-button color="warn" style="width: 40%; margin: auto auto">
+            Change address
+          </button>
         </div>
       </div>
-      <button mat-button color="accent">Change address</button>
       <br />
       <br />
       <div class="d-grid gap-2">
@@ -111,9 +102,34 @@
         </button>
         <button mat-raised-button color="accent">Continue</button>
       </div>
-      <div class="row">
+      <div class="row" style="margin-top: 4%">
         <!-- order summary -->
+        <div class="col-lg-12">
+          <div class="row">
+            <h4><b>Order Summary</b></h4>
+          </div>
+          <div class="row order-summary">
+            <div class="col-lg-5">Cart value</div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2"><b>6969.69</b></div>
+          </div>
+          <div class="row order-summary">
+            <div class="col-lg-5">Delivery charges</div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2" style="color: rgb(8, 130, 104)">
+              <b>Free</b>
+            </div>
+          </div>
+          <hr />
+          <div class="row order-summary">
+            <div class="col-lg-5">Amount to be paid</div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2"><b>6969.69</b></div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-lg-1"></div>
   </div>
+  <app-feature-banner></app-feature-banner>
 </div>
