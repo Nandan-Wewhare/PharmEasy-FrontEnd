@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-authdialog',
@@ -17,7 +18,8 @@ export class AuthdialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AuthdialogComponent>,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {}
@@ -37,6 +39,7 @@ export class AuthdialogComponent implements OnInit {
           );
           this.dialogRef.close();
           this.snackBar.open('Logged in successfully!', '', { duration: 2000 });
+          this.cartService.getUserCart();
         } else {
           this.snackBar.open(response['message'], '', { duration: 2000 });
         }
