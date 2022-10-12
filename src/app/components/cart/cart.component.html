@@ -5,51 +5,61 @@
     <div class="col-lg-5">
       <div class="row">
         <div class="col-lg-5">
-          <h4>8 items in cart</h4>
+          <h4>{{ cartService.cart?.totalItems }} item(s) in cart</h4>
         </div>
         <div class="col-lg-4"></div>
         <div class="col-lg-3">
           <small>Prices are indicative</small>
         </div>
       </div>
-      <div class="card mb-4" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img
-              src="https://cdn01.pharmeasy.in/dam/products/I42604/mesacol-od-tab-15s-2-1641538256.jpg"
-              width="150px"
-              style="margin-top: 5px; margin-left: 5px"
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Product title</h5>
-              <p class="card-text">Quantity: 7</p>
-              <div class="row">
-                <div class="col-md-9">
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-success cartBtn"
-                  >
-                    <mat-icon>add</mat-icon>
-                  </button>
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-danger cartBtn"
-                  >
-                    <mat-icon>remove</mat-icon>
-                  </button>
-                  <button
-                    mat-button
-                    type="button"
-                    class="btn btn-warning cartBtn"
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
+      <div *ngFor="let item of cartService.cart?.products">
+        <div class="card mb-4" style="width: 100%">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="{{ item.productId.image }}"
+                width="150px"
+                style="margin-top: 5px; margin-left: 5px"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.productId.name }}</h5>
+                <p class="card-text">Quantity: {{ item.quantity }}</p>
+                <div class="row">
+                  <div class="col-md-8">
+                    <button
+                      mat-button
+                      type="button"
+                      class="btn btn-success cartBtn"
+                      (click)="cartService.addToCart(item.productId._id)"
+                    >
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <button
+                      mat-button
+                      type="button"
+                      class="btn btn-danger cartBtn"
+                      (click)="cartService.decreaseQuantity(item.productId._id)"
+                    >
+                      <mat-icon>remove</mat-icon>
+                    </button>
+                    <button
+                      mat-button
+                      type="button"
+                      class="btn btn-warning cartBtn"
+                      (click)="
+                        cartService.removeProductFromCart(item.productId._id)
+                      "
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-2">
+                    <b>₹ {{ item.productId.price }} </b>
+                  </div>
                 </div>
-                <div class="col-md-3"><b> 2565.35 </b></div>
               </div>
             </div>
           </div>
@@ -88,9 +98,13 @@
       <div class="row">
         <!-- deliver to address block -->
         <div style="background-color: rgb(177, 231, 177)" class="d-grid gap-2">
-          Deliver to:<br />Address<br />
+          Deliver to:<br />{{ authService.getLoggedInUser()["address"] }}<br />
           <button mat-button color="warn" style="width: 40%; margin: auto auto">
-            Change address
+            {{
+              authService.getLoggedInUser()["address"] == ""
+                ? "Set address"
+                : "Change address"
+            }}
           </button>
         </div>
       </div>
@@ -110,12 +124,14 @@
           </div>
           <div class="row order-summary">
             <div class="col-lg-5">Cart value</div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-2"><b>6969.69</b></div>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+              <b>₹ {{ cartService.cart?.total | number: "1.0" }}</b>
+            </div>
           </div>
           <div class="row order-summary">
             <div class="col-lg-5">Delivery charges</div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-5"></div>
             <div class="col-lg-2" style="color: rgb(8, 130, 104)">
               <b>Free</b>
             </div>
@@ -123,8 +139,10 @@
           <hr />
           <div class="row order-summary">
             <div class="col-lg-5">Amount to be paid</div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-2"><b>6969.69</b></div>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+              <b>₹ {{ cartService.cart?.total | number: "1.0" }}</b>
+            </div>
           </div>
         </div>
       </div>
