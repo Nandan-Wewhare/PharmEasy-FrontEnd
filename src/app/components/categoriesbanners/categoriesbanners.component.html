@@ -3,8 +3,22 @@
   <br />
   <ul *ngIf="!isLoading" id="autoplayCategories">
     <li *ngFor="let category of categories">
-      <app-category-tile [category]="category"></app-category-tile>
+      <a
+        routerLink="/category/{{ category._id }}"
+        style="text-decoration: none"
+      >
+        <mat-card
+          style="max-width: 200px; border: 1px solid rgb(179, 179, 179)"
+          class="mat-elevation-z0 text-center"
+        >
+          <img mat-card-md-image src="{{ category.image }}" />
+          <mat-card-footer style="margin-top: 5px"
+            ><span>{{ category.name }}</span></mat-card-footer
+          >
+        </mat-card>
+      </a>
     </li>
   </ul>
+
   <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>
