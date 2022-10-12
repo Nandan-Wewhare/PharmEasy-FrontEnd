@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  host: 'https://pharmeasyclone.herokuapp.com/api/v1',
+  host: 'https://pharmeasy-clone-nandan.onrender.com/api/v1',
 };

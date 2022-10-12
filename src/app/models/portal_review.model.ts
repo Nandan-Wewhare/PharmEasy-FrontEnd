@@ -27,7 +27,7 @@ export interface Reviewer {
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-  public static toPortalReview(json: string): PortalReview {
+  public static toPortalReview(json: any): PortalReview {
     return cast(json, r('PortalReview'));
   }
 
