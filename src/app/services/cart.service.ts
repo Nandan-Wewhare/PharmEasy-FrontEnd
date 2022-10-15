@@ -17,6 +17,8 @@ export class CartService {
 
   cart: Cart | null = null;
 
+  isLoading = false;
+
   getUserCart() {
     if (this.authService.isLoggedIn()) {
       var userId = this.authService.getLoggedInUser()['_id'];
@@ -36,6 +38,7 @@ export class CartService {
   }
 
   addToCart(productId: string) {
+    this.isLoading = true;
     if (this.authService.isLoggedIn()) {
       var userId = this.authService.getLoggedInUser()['_id'];
       this.httpClient
@@ -46,6 +49,7 @@ export class CartService {
           next: (response: any) => {
             if (response['status']) {
               this.cart = Convert.toCart(response['cart']);
+              this.snackBar.open('Added to cart!', '', { duration: 2000 });
             } else {
               this.snackBar.open(response['message'], '', { duration: 2000 });
             }
@@ -61,9 +65,11 @@ export class CartService {
         duration: 2000,
       });
     }
+    this.isLoading = false;
   }
 
   decreaseQuantity(productId: string) {
+    this.isLoading = true;
     if (this.authService.isLoggedIn()) {
       var userId = this.authService.getLoggedInUser()['_id'];
       this.httpClient
@@ -74,6 +80,7 @@ export class CartService {
           next: (response: any) => {
             if (response['status']) {
               this.cart = Convert.toCart(response['cart']);
+              this.snackBar.open('Success!', '', { duration: 2000 });
             } else {
               this.snackBar.open(response['message'], '', { duration: 2000 });
             }
@@ -85,9 +92,11 @@ export class CartService {
           },
         });
     }
+    this.isLoading = false;
   }
 
   removeProductFromCart(productId: string) {
+    this.isLoading = true;
     if (this.authService.isLoggedIn()) {
       var userId = this.authService.getLoggedInUser()['_id'];
       this.httpClient
@@ -100,6 +109,9 @@ export class CartService {
           next: (response: any) => {
             if (response['status']) {
               this.cart = Convert.toCart(response['cart']);
+              this.snackBar.open('Removed successfully!', '', {
+                duration: 2000,
+              });
             } else {
               this.snackBar.open(response['message'], '', { duration: 2000 });
             }
@@ -111,5 +123,6 @@ export class CartService {
           },
         });
     }
+    this.isLoading = false;
   }
 }
