@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const materialComponents = [
   MatToolbarModule,
@@ -27,6 +28,7 @@ const materialComponents = [
   MatSnackBarModule,
   MatProgressSpinnerModule,
   MatBadgeModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({

@@ -47,6 +47,7 @@ export class CartService {
         })
         .subscribe({
           next: (response: any) => {
+            this.isLoading = false;
             if (response['status']) {
               this.cart = Convert.toCart(response['cart']);
               this.snackBar.open('Added to cart!', '', { duration: 2000 });
@@ -55,6 +56,7 @@ export class CartService {
             }
           },
           error: (error: any) => {
+            this.isLoading = false;
             this.snackBar.open(error['error']['message'], '', {
               duration: 2000,
             });
@@ -65,7 +67,6 @@ export class CartService {
         duration: 2000,
       });
     }
-    this.isLoading = false;
   }
 
   decreaseQuantity(productId: string) {
@@ -78,6 +79,7 @@ export class CartService {
         })
         .subscribe({
           next: (response: any) => {
+            this.isLoading = false;
             if (response['status']) {
               this.cart = Convert.toCart(response['cart']);
               this.snackBar.open('Success!', '', { duration: 2000 });
@@ -86,13 +88,13 @@ export class CartService {
             }
           },
           error: (error: any) => {
+            this.isLoading = false;
             this.snackBar.open(error['error']['message'], '', {
               duration: 2000,
             });
           },
         });
     }
-    this.isLoading = false;
   }
 
   removeProductFromCart(productId: string) {
@@ -108,6 +110,7 @@ export class CartService {
         .subscribe({
           next: (response: any) => {
             if (response['status']) {
+              this.isLoading = false;
               this.cart = Convert.toCart(response['cart']);
               this.snackBar.open('Removed successfully!', '', {
                 duration: 2000,
@@ -117,12 +120,12 @@ export class CartService {
             }
           },
           error: (error: any) => {
+            this.isLoading = false;
             this.snackBar.open(error['error']['message'], '', {
               duration: 2000,
             });
           },
         });
     }
-    this.isLoading = false;
   }
 }

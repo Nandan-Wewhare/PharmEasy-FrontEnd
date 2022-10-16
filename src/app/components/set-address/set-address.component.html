@@ -1,0 +1,46 @@
+<div>
+  <form #setAddressForm="ngForm" style="margin-top: 10px; margin-bottom: 10px">
+    <mat-form-field appearance="outline" style="width: 100%; font-size: 12px">
+      <mat-label>Set address</mat-label>
+      <textarea
+        rows="5"
+        cols="100"
+        matInput
+        required
+        #address="ngModel"
+        ngModel
+        name="address"
+      ></textarea>
+      <mat-error *ngIf="address.touched && address.value.length == 0"
+        >Invalid address</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%; font-size: 12px">
+      <mat-label>Set pincode</mat-label>
+      <input
+        rows="5"
+        cols="100"
+        matInput
+        required
+        #pincode="ngModel"
+        ngModel
+        name="pincode"
+        maxlength="6"
+        minlength="6"
+      />
+      <mat-error *ngIf="pincode.touched && pincode.value.length != 6"
+        >Invalid pincode</mat-error
+      >
+    </mat-form-field>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="!setAddressForm.valid"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</div>

@@ -32,16 +32,6 @@
             }}!
           </button>
         </li>
-        <li *ngIf="authService.isLoggedIn()" class="nav-item">
-          <button mat-button color="secondary" (click)="authService.logout()">
-            <mat-icon>logout</mat-icon> Logout
-          </button>
-        </li>
-        <li class="nav-item">
-          <button mat-button color="secondary">
-            <mat-icon>percent</mat-icon> Offers
-          </button>
-        </li>
         <li class="nav-item">
           <button mat-button color="secondary" [routerLink]="['/cart']">
             <mat-icon
@@ -51,6 +41,11 @@
               >shopping_cart_outlined</mat-icon
             >
             Cart
+          </button>
+        </li>
+        <li *ngIf="authService.isLoggedIn()" class="nav-item">
+          <button mat-button color="secondary" (click)="authService.logout()">
+            <mat-icon>logout</mat-icon> Logout
           </button>
         </li>
       </ul>

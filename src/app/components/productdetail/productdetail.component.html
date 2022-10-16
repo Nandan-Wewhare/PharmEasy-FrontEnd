@@ -50,10 +50,14 @@
           mat-raised-button
           color="accent"
           style="width: 30%"
-          (click)="cartService.addToCart(product._id)"
+          (click)="
+            cartService.isLoading ? null : cartService.addToCart(product._id)
+          "
         >
-          <mat-icon>add_shopping_cart</mat-icon>
-          Add to Cart
+          <mat-icon>
+            {{ cartService.isLoading ? "sync" : "add_shopping_cart" }}
+          </mat-icon>
+          {{ cartService.isLoading ? "Loading..." : "Add to Cart" }}
         </button>
       </div>
       <br />
