@@ -148,7 +148,9 @@
       <div class="row">
         <!-- deliver to address block -->
         <div style="background-color: rgb(177, 231, 177)" class="d-grid gap-2">
-          Deliver to:<br />{{ authService.getLoggedInUser()["address"] }}<br />
+          <span style="font-size: 18px; font-weight: bold">Deliver to:</span
+          >{{ authService.getLoggedInUser()["address"] }}<br />
+          <span>{{ authService.getLoggedInUser()["zip"] }}</span>
           <button
             mat-button
             color="warn"

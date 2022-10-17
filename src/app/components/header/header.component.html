@@ -12,7 +12,11 @@
         src="https://assets.pharmeasy.in/apothecary/images/ic_express%20delivery.svg?dim=16x0"
       />
       Express delivery to:<button mat-button (click)="openPincodeCheckDialog()">
-        <span style="font-weight: bold">Select Pincode</span>
+        <span style="font-weight: bold">{{
+          authService.getLoggedInUser()["zip"] != ""
+            ? authService.getLoggedInUser()["zip"]
+            : "Select Pincode"
+        }}</span>
       </button>
     </div>
     <div class="collapse navbar-collapse">
