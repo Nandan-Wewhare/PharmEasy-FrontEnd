@@ -34,6 +34,17 @@ export class AuthService {
     });
   }
 
+  updateAddress(address: string, pincode: string) {
+    var user = this.loggedInUser['_id'];
+    return this.httpClient.patch(
+      `${environment.host}/auth/updateUser/${this.getLoggedInUser()['_id']}`,
+      {
+        address: address,
+        zip: pincode,
+      }
+    );
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem(Constants.AUTH_TOKEN) != null;
   }

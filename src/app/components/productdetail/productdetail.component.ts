@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Convert, Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ProductdetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private snackBar: MatSnackBar,
-    public authService: AuthService
+    public authService: AuthService,
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/cart.model';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { SetAddressComponent } from '../set-address/set-address.component';
 
 @Component({
   selector: 'app-cart',
@@ -11,8 +12,15 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
   constructor(
     public cartService: CartService,
-    public authService: AuthService
+    public authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
+
+  openSetAddressDialog() {
+    this.dialog.open(SetAddressComponent, {
+      backdropClass: 'dialog-backdrop',
+    });
+  }
 }

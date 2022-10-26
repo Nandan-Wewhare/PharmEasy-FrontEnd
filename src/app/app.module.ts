@@ -26,6 +26,7 @@ import { DatePipe } from '@angular/common';
 import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './services/auth.guard';
 import { FeatureBannerComponent } from './components/feature-banner/feature-banner.component';
+import { SetAddressComponent } from './components/set-address/set-address.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FeatureBannerComponent } from './components/feature-banner/feature-bann
     PincodedialogComponent,
     CartComponent,
     FeatureBannerComponent,
+    SetAddressComponent,
   ],
   imports: [
     BrowserModule,

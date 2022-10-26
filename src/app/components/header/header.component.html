@@ -12,7 +12,13 @@
         src="https://assets.pharmeasy.in/apothecary/images/ic_express%20delivery.svg?dim=16x0"
       />
       Express delivery to:<button mat-button (click)="openPincodeCheckDialog()">
-        <span style="font-weight: bold">Select Pincode</span>
+        <span style="font-weight: bold">{{
+          authService.isLoggedIn()
+            ? authService.getLoggedInUser()["zip"] != ""
+              ? authService.getLoggedInUser()["zip"]
+              : "Select Pincode"
+            : "Select Pincode"
+        }}</span>
       </button>
     </div>
     <div class="collapse navbar-collapse">
@@ -23,23 +29,13 @@
           </button>
         </li>
         <li *ngIf="authService.isLoggedIn()" class="nav-item">
-          <button mat-button color="secondary">
+          <button mat-button color="secondary" [matMenuTriggerFor]="menu">
             <mat-icon>person_outlined</mat-icon> Welcome
             {{
               authService.getLoggedInUser()["name"] != ""
                 ? authService.getLoggedInUser()["name"].split(" ")[0]
                 : authService.getLoggedInUser()["phone"]
             }}!
-          </button>
-        </li>
-        <li *ngIf="authService.isLoggedIn()" class="nav-item">
-          <button mat-button color="secondary" (click)="authService.logout()">
-            <mat-icon>logout</mat-icon> Logout
-          </button>
-        </li>
-        <li class="nav-item">
-          <button mat-button color="secondary">
-            <mat-icon>percent</mat-icon> Offers
           </button>
         </li>
         <li class="nav-item">
@@ -58,3 +54,17 @@
   </div>
 </nav>
 <hr style="margin-top: 0px" />
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon> <span>My Profile</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notes</mat-icon> <span>Uploaded prescriptions</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>description</mat-icon> <span>My Orders</span>
+  </button>
+  <button mat-menu-item (click)="authService.logout()">
+    <mat-icon>logout</mat-icon> <span>Logout</span>
+  </button>
+</mat-menu>

@@ -46,8 +46,18 @@
     </div>
     <div class="col-lg-4">
       <div class="row d-flex justify-content-center">
-        <button mat-raised-button color="accent" style="width: 30%">
-          <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+        <button
+          mat-raised-button
+          color="accent"
+          style="width: 30%"
+          (click)="
+            cartService.isLoading ? null : cartService.addToCart(product._id)
+          "
+        >
+          <mat-icon>
+            {{ cartService.isLoading ? "sync" : "add_shopping_cart" }}
+          </mat-icon>
+          {{ cartService.isLoading ? "Loading..." : "Add to Cart" }}
         </button>
       </div>
       <br />
@@ -57,6 +67,7 @@
           color="accent"
           style="width: 30%"
           [disabled]="!authService.isLoggedIn()"
+          routerLink="/cart"
         >
           <mat-icon>chevron_right</mat-icon> View Cart
         </button>

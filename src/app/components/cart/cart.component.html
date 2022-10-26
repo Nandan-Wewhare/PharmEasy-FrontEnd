@@ -4,11 +4,20 @@
     <!-- Left section -->
     <div class="col-lg-5">
       <div class="row">
-        <div class="col-lg-5">
+        <div
+          *ngIf="
+            cartService.cart?.totalItems != null &&
+            cartService.cart?.totalItems! > 0
+          "
+          class="col-lg-5"
+        >
           <h4>{{ cartService.cart?.totalItems }} item(s) in cart</h4>
         </div>
+        <div *ngIf="cartService.cart?.totalItems! == 0" class="col-lg-5">
+          <h4>Your cart is empty</h4>
+        </div>
         <div class="col-lg-4"></div>
-        <div class="col-lg-3">
+        <div *ngIf="cartService.cart?.totalItems! > 0" class="col-lg-3">
           <small>Prices are indicative</small>
         </div>
       </div>
@@ -24,15 +33,27 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ item.productId.name }}</h5>
+                <a
+                  routerLink="/product/{{ item.productId._id }}"
+                  style="text-decoration: none; color: black"
+                >
+                  <h5 class="card-title">{{ item.productId.name }}</h5>
+                </a>
                 <p class="card-text">Quantity: {{ item.quantity }}</p>
                 <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-8" *ngIf="cartService.isLoading">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </div>
+                  <div *ngIf="!cartService.isLoading" class="col-md-8">
                     <button
                       mat-button
                       type="button"
                       class="btn btn-success cartBtn"
-                      (click)="cartService.addToCart(item.productId._id)"
+                      (click)="
+                        cartService.isLoading
+                          ? null
+                          : cartService.addToCart(item.productId._id)
+                      "
                     >
                       <mat-icon>add</mat-icon>
                     </button>
@@ -40,7 +61,11 @@
                       mat-button
                       type="button"
                       class="btn btn-danger cartBtn"
-                      (click)="cartService.decreaseQuantity(item.productId._id)"
+                      (click)="
+                        cartService.isLoading
+                          ? null
+                          : cartService.decreaseQuantity(item.productId._id)
+                      "
                     >
                       <mat-icon>remove</mat-icon>
                     </button>
@@ -49,15 +74,25 @@
                       type="button"
                       class="btn btn-warning cartBtn"
                       (click)="
-                        cartService.removeProductFromCart(item.productId._id)
+                        cartService.isLoading
+                          ? null
+                          : cartService.removeProductFromCart(
+                              item.productId._id
+                            )
                       "
                     >
                       <mat-icon>delete</mat-icon>
                     </button>
                   </div>
-                  <div class="col-md-2"></div>
-                  <div class="col-md-2">
-                    <b>₹ {{ item.productId.price }} </b>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-3">
+                    <b
+                      >₹
+                      {{
+                        item.productId.price -
+                          (item.productId.price * item.productId.discount) / 100
+                      }}
+                    </b>
                   </div>
                 </div>
               </div>
@@ -66,15 +101,30 @@
         </div>
       </div>
       <div>
-        <h2><b>Additional Notes</b></h2>
-        <mat-form-field appearance="outline" style="width: 100%">
-          <textarea
-            rows="5"
-            cols="100"
-            matInput
-            placeholder="Enter any additional information regarding your order"
-          ></textarea>
-        </mat-form-field>
+        <div
+          *ngIf="
+            cartService.cart?.totalItems != null &&
+            cartService.cart?.totalItems! > 0
+          "
+        >
+          <h2><b>Additional Notes</b></h2>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <textarea
+              rows="5"
+              cols="100"
+              matInput
+              placeholder="Enter any additional information regarding your order"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div
+          *ngIf="
+            cartService.cart?.totalItems == null ||
+            cartService.cart?.totalItems! == 0
+          "
+        >
+          <img src="https://assets.pharmeasy.in/web-assets/dist/bb14593e.svg" />
+        </div>
         <ul>
           <li>
             A licensed pharmacy would be delivering your order basis
@@ -98,8 +148,15 @@
       <div class="row">
         <!-- deliver to address block -->
         <div style="background-color: rgb(177, 231, 177)" class="d-grid gap-2">
-          Deliver to:<br />{{ authService.getLoggedInUser()["address"] }}<br />
-          <button mat-button color="warn" style="width: 40%; margin: auto auto">
+          <span style="font-size: 18px; font-weight: bold">Deliver to:</span
+          >{{ authService.getLoggedInUser()["address"] }}<br />
+          <span>{{ authService.getLoggedInUser()["zip"] }}</span>
+          <button
+            mat-button
+            color="warn"
+            style="width: 40%; margin: auto auto"
+            (click)="openSetAddressDialog()"
+          >
             {{
               authService.getLoggedInUser()["address"] == ""
                 ? "Set address"
@@ -114,7 +171,13 @@
         <button mat-stroked-button color="accent">
           <mat-icon>insights</mat-icon> Apply coupons
         </button>
-        <button mat-raised-button color="accent">Continue</button>
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="cartService.cart?.totalItems == 0"
+        >
+          {{ cartService.isLoading ? "Loading...." : "Continue" }}
+        </button>
       </div>
       <div class="row" style="margin-top: 4%">
         <!-- order summary -->
@@ -124,24 +187,24 @@
           </div>
           <div class="row order-summary">
             <div class="col-lg-5">Cart value</div>
-            <div class="col-lg-5"></div>
-            <div class="col-lg-2">
-              <b>₹ {{ cartService.cart?.total | number: "1.0" }}</b>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3">
+              <b>₹ {{ cartService.cart?.total | number: "1.2-2" }}</b>
             </div>
           </div>
           <div class="row order-summary">
             <div class="col-lg-5">Delivery charges</div>
-            <div class="col-lg-5"></div>
-            <div class="col-lg-2" style="color: rgb(8, 130, 104)">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3" style="color: rgb(8, 130, 104)">
               <b>Free</b>
             </div>
           </div>
           <hr />
           <div class="row order-summary">
             <div class="col-lg-5">Amount to be paid</div>
-            <div class="col-lg-5"></div>
-            <div class="col-lg-2">
-              <b>₹ {{ cartService.cart?.total | number: "1.0" }}</b>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3">
+              <b>₹ {{ cartService.cart?.total | number: "1.2-2" }}</b>
             </div>
           </div>
         </div>
