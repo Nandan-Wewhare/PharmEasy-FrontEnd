@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Cart, Convert } from '../models/cart.model';
 import { AuthService } from './auth.service';
 
+declare var Razorpay: any;
 @Injectable({
   providedIn: 'root',
 })
@@ -127,5 +128,27 @@ export class CartService {
           },
         });
     }
+  }
+
+  checkout() {
+    var options = {
+      key: 'rzp_test_B9HV2i8659WwkE',
+      amount: Math.ceil(this.cart?.total! * 100), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: 'INR',
+      name: 'PharmEasy',
+      prefill: {
+        name: this.authService.getLoggedInUser()['name'],
+        email: this.authService.getLoggedInUser()['email'],
+        contact: this.authService.getLoggedInUser()['phone'],
+      },
+      handler: (response: any) => {
+        console.log('payment_id:', response.razorpay_payment_id);
+      },
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+    rzp.on('payment.failed', (response: any) =>
+      this.snackBar.open(response.error.description, '', { duration: 2000 })
+    );
   }
 }

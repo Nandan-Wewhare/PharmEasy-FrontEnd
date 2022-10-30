@@ -175,6 +175,7 @@
           mat-raised-button
           color="accent"
           [disabled]="cartService.cart?.totalItems == 0"
+          (click) = "cartService.checkout()"
         >
           {{ cartService.isLoading ? "Loading...." : "Continue" }}
         </button>
