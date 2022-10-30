@@ -21,78 +21,81 @@
           <small>Prices are indicative</small>
         </div>
       </div>
-      <div *ngFor="let item of cartService.cart?.products">
-        <div class="card mb-4" style="width: 100%">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="{{ item.productId.image }}"
-                width="150px"
-                style="margin-top: 5px; margin-left: 5px"
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <a
-                  routerLink="/product/{{ item.productId._id }}"
-                  style="text-decoration: none; color: black"
-                >
-                  <h5 class="card-title">{{ item.productId.name }}</h5>
-                </a>
-                <p class="card-text">Quantity: {{ item.quantity }}</p>
-                <div class="row">
-                  <div class="col-md-8" *ngIf="cartService.isLoading">
-                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-                  </div>
-                  <div *ngIf="!cartService.isLoading" class="col-md-8">
-                    <button
-                      mat-button
-                      type="button"
-                      class="btn btn-success cartBtn"
-                      (click)="
-                        cartService.isLoading
-                          ? null
-                          : cartService.addToCart(item.productId._id)
-                      "
-                    >
-                      <mat-icon>add</mat-icon>
-                    </button>
-                    <button
-                      mat-button
-                      type="button"
-                      class="btn btn-danger cartBtn"
-                      (click)="
-                        cartService.isLoading
-                          ? null
-                          : cartService.decreaseQuantity(item.productId._id)
-                      "
-                    >
-                      <mat-icon>remove</mat-icon>
-                    </button>
-                    <button
-                      mat-button
-                      type="button"
-                      class="btn btn-warning cartBtn"
-                      (click)="
-                        cartService.isLoading
-                          ? null
-                          : cartService.removeProductFromCart(
-                              item.productId._id
-                            )
-                      "
-                    >
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-1"></div>
-                  <div class="col-md-3">
-                    <b
-                      >₹
-                      {{
-                        item.productId.price -
-                          (item.productId.price * item.productId.discount) / 100
-                      }}
-                    </b>
+      <div *ngIf="cartService.cart?.totalItems! > 0">
+        <div *ngFor="let item of cartService.cart?.products">
+          <div class="card mb-4" style="width: 100%">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{{ item.productId.image }}"
+                  width="150px"
+                  style="margin-top: 5px; margin-left: 5px"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a
+                    routerLink="/product/{{ item.productId._id }}"
+                    style="text-decoration: none; color: black"
+                  >
+                    <h5 class="card-title">{{ item.productId.name }}</h5>
+                  </a>
+                  <p class="card-text">Quantity: {{ item.quantity }}</p>
+                  <div class="row">
+                    <div class="col-md-8" *ngIf="cartService.isLoading">
+                      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    </div>
+                    <div *ngIf="!cartService.isLoading" class="col-md-8">
+                      <button
+                        mat-button
+                        type="button"
+                        class="btn btn-success cartBtn"
+                        (click)="
+                          cartService.isLoading
+                            ? null
+                            : cartService.addToCart(item.productId._id)
+                        "
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <button
+                        mat-button
+                        type="button"
+                        class="btn btn-danger cartBtn"
+                        (click)="
+                          cartService.isLoading
+                            ? null
+                            : cartService.decreaseQuantity(item.productId._id)
+                        "
+                      >
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                      <button
+                        mat-button
+                        type="button"
+                        class="btn btn-warning cartBtn"
+                        (click)="
+                          cartService.isLoading
+                            ? null
+                            : cartService.removeProductFromCart(
+                                item.productId._id
+                              )
+                        "
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                      <b
+                        >₹
+                        {{
+                          item.productId.price -
+                            (item.productId.price * item.productId.discount) /
+                              100
+                        }}
+                      </b>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -175,7 +178,7 @@
           mat-raised-button
           color="accent"
           [disabled]="cartService.cart?.totalItems == 0"
-          (click) = "cartService.checkout()"
+          (click)="cartService.checkout()"
         >
           {{ cartService.isLoading ? "Loading...." : "Continue" }}
         </button>

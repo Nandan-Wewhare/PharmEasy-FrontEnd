@@ -142,7 +142,27 @@ export class CartService {
         contact: this.authService.getLoggedInUser()['phone'],
       },
       handler: (response: any) => {
-        console.log('payment_id:', response.razorpay_payment_id);
+        // payment success handler
+        this.createOrder(response.razorpay_payment_id).subscribe({
+          next: (response: any) => {
+            if (response['status']) {
+              // clear cart
+              this.cart!.products.splice(0);
+              this.cart!.totalItems = 0;
+              this.cart!.total = 0;
+              this.snackBar.open('Order placed successfully', '', {
+                duration: 2000,
+              });
+              this.snackBar.open(response['message'], '', { duration: 2000 });
+            }
+          },
+          error: (error: any) => {
+            this.isLoading = false;
+            this.snackBar.open(error['error']['message'], '', {
+              duration: 2000,
+            });
+          },
+        });
       },
     };
     var rzp = new Razorpay(options);
@@ -150,5 +170,14 @@ export class CartService {
     rzp.on('payment.failed', (response: any) =>
       this.snackBar.open(response.error.description, '', { duration: 2000 })
     );
+  }
+
+  createOrder(paymentId: string) {
+    var userId = this.authService.getLoggedInUser()['_id'];
+    return this.httpClient.post(`${environment.host}/orders/${userId}`, {
+      paymentId: paymentId,
+      products: this.cart?.products.map((product) => product.productId),
+      total: Math.ceil(this.cart?.total!),
+    });
   }
 }
