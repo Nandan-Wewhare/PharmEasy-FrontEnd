@@ -35,13 +35,20 @@ export class AuthService {
   }
 
   updateAddress(address: string, pincode: string) {
-    var user = this.loggedInUser['_id'];
     return this.httpClient.patch(
       `${environment.host}/auth/updateUser/${this.getLoggedInUser()['_id']}`,
       {
         address: address,
         zip: pincode,
       }
+    );
+  }
+
+  updateUser() {
+    var user = this.getLoggedInUser();
+    return this.httpClient.patch(
+      `${environment.host}/auth/updateUser/${user['_id']}`,
+      JSON.parse(JSON.stringify(user))
     );
   }
 
