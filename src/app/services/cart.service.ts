@@ -153,7 +153,6 @@ export class CartService {
               this.snackBar.open('Order placed successfully', '', {
                 duration: 2000,
               });
-              this.snackBar.open(response['message'], '', { duration: 2000 });
             }
           },
           error: (error: any) => {
