@@ -44,11 +44,19 @@ export class AuthService {
     );
   }
 
-  updateUser() {
+  updateUser(name: string, email: string, phone: string) {
     var user = this.getLoggedInUser();
+    console.log(user);
     return this.httpClient.patch(
       `${environment.host}/auth/updateUser/${user['_id']}`,
-      JSON.parse(JSON.stringify(user))
+      {
+        name: name,
+        email: email,
+        phone: phone,
+        address: user['address'],
+        passwordHash: user['passwordHash'],
+        zip: user['zip'],
+      }
     );
   }
 

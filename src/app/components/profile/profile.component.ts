@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
   updateUser() {
     this.loading = true;
-    this.authService.updateUser().subscribe({
+    this.authService.updateUser(this.name, this.email, this.phone).subscribe({
       next: (response: any) => {
         if (response['status']) {
           this.loading = false;
