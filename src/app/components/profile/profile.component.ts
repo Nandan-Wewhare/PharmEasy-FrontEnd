@@ -31,7 +31,10 @@ export class ProfileComponent implements OnInit {
       next: (response: any) => {
         if (response['status']) {
           this.loading = false;
-          this.authService.setLoginData(response['token'], response['user']);
+          this.authService.setLoginData(
+            response['token'],
+            JSON.stringify(response['user'])
+          );
           this.snackBar.open('Updated successfully!', '', { duration: 2000 });
         } else {
           this.snackBar.open(response['message'], '', { duration: 2000 });
@@ -42,6 +45,5 @@ export class ProfileComponent implements OnInit {
         this.snackBar.open(error['error']['message'], '', { duration: 2000 });
       },
     });
-    this.loading = false;
   }
 }
