@@ -27,6 +27,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from './services/auth.guard';
 import { FeatureBannerComponent } from './components/feature-banner/feature-banner.component';
 import { SetAddressComponent } from './components/set-address/set-address.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SetAddressComponent } from './components/set-address/set-address.compon
     CartComponent,
     FeatureBannerComponent,
     SetAddressComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
