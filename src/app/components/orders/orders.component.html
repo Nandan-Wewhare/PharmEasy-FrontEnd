@@ -1,0 +1,68 @@
+<div style="margin-left: 25%; margin-right: 25%">
+  <h3>My Orders</h3>
+  <br /><br />
+  <div *ngIf="orders.length == 0 && !ordersLoading" style="margin: 0 25%">
+    <img
+      src="https://assets.pharmeasy.in/web-assets/dist/fefded9b.svg"
+      width="190px"
+      style="margin-bottom: 25px; margin-left: 11%"
+    />
+    <h5 style="font-weight: bold">Unwell? Order medicines at home!</h5>
+    <h6>Your medicine orders will be displayed here.</h6>
+  </div>
+  <div *ngIf="orders.length > 0">
+    <mat-accordion *ngFor="let order of orders">
+      <mat-expansion-panel style="margin-bottom: 2%">
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            >Order no.
+            {{ order._id }}
+          </mat-panel-title>
+          <mat-panel-description style="margin-left: 20px">
+            Rs. {{ order.total }}
+            <span
+              *ngIf="order.cancelled"
+              class="badge bg-danger"
+              style="margin-left: 20px"
+              >Cancelled</span
+            >
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <hr />
+        <h6>
+          <i><b>Ordered at:</b> {{ order.createdAt | date: "medium" }}</i>
+        </h6>
+        <table class="table-hover table">
+          <tr *ngFor="let product of order.products">
+            <td><img src="{{ product.image }}" height="100rem" /></td>
+            <td>
+              <a
+                routerLink="/product/{{ product._id }}"
+                style="text-decoration: none; color: black"
+              >
+                {{ product.name }}
+              </a>
+            </td>
+            <td>Rs. {{ product.price }}</td>
+          </tr>
+        </table>
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="cancelOrder(order._id)"
+            disabled="{{ ordersLoading || order.cancelled }}"
+          >
+            Cancel order
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<mat-spinner
+  style="margin-left: 50%; margin-right: 50%"
+  *ngIf="ordersLoading"
+  [diameter]="40"
+  color="accent"
+></mat-spinner>

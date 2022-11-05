@@ -28,6 +28,7 @@ import { AuthGuard } from './services/auth.guard';
 import { FeatureBannerComponent } from './components/feature-banner/feature-banner.component';
 import { SetAddressComponent } from './components/set-address/set-address.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     FeatureBannerComponent,
     SetAddressComponent,
     ProfileComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
