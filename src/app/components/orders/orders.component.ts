@@ -40,4 +40,25 @@ export class OrdersComponent implements OnInit {
       },
     });
   }
+
+  cancelOrder(orderId: string) {
+    this.ordersLoading = true;
+    this.orderService.cancelOrder(orderId).subscribe({
+      next: (response: any) => {
+        this.ordersLoading = false;
+        if (response['status']) {
+          this.orders.find((order) => order._id == orderId)!.cancelled = true;
+          this.snackBar.open('Order cancelled successfully', '', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open(response['message'], '', { duration: 2000 });
+        }
+      },
+      error: (error: any) => {
+        this.ordersLoading = false;
+        this.snackBar.open(error['error']['message'], '', { duration: 2000 });
+      },
+    });
+  }
 }

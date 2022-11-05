@@ -16,4 +16,8 @@ export class OrderService {
     var userId = this.authService.getLoggedInUser()['_id'];
     return this.httpClient.get(`${environment.host}/orders/${userId}`);
   }
+
+  cancelOrder(orderId: string) {
+    return this.httpClient.patch(`${environment.host}/orders/${orderId}`, {});
+  }
 }

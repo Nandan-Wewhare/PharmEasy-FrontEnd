@@ -14,6 +14,8 @@ export interface Order {
   user: string;
   total: number;
   cancelled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Product {
@@ -197,6 +199,8 @@ const typeMap: any = {
       { json: 'user', js: 'user', typ: '' },
       { json: 'total', js: 'total', typ: 0 },
       { json: 'cancelled', js: 'cancelled', typ: true },
+      { json: 'createdAt', js: 'createdAt', typ: Date },
+      { json: 'updatedAt', js: 'updatedAt', typ: Date },
     ],
     false
   ),

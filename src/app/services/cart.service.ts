@@ -131,6 +131,13 @@ export class CartService {
   }
 
   checkout() {
+    var address = this.authService.getLoggedInUser()['address'];
+    if (!address) {
+      this.snackBar.open('Please set delivery address before continuing', '', {
+        duration: 2000,
+      });
+      return;
+    }
     var options = {
       key: 'rzp_test_B9HV2i8659WwkE',
       amount: Math.ceil(this.cart?.total! * 100), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
