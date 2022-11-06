@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class CategorydetailComponent implements OnInit {
   categoryId!: string;
   categoryName!: string;
+  loading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,12 +38,14 @@ export class CategorydetailComponent implements OnInit {
   ];
 
   getProductsInCategory() {
+    this.loading = true;
     this.httpClient
       .get(
         `${environment.host}/products/getProductsInCategory/${this.categoryId}`
       )
       .subscribe({
         next: (response: any) => {
+          this.loading = false;
           if (response['status']) {
             this.categoryName = response['category'];
             response['products'].forEach((product: any) => {
@@ -53,8 +56,12 @@ export class CategorydetailComponent implements OnInit {
             this.snackBar.open(response['message'], '', { duration: 2000 });
           }
         },
-        error: (error) =>
-          this.snackBar.open(error['error']['message'], '', { duration: 2000 }),
+        error: (error) => {
+          this.loading = false;
+          return this.snackBar.open(error['error']['message'], '', {
+            duration: 2000,
+          });
+        },
       });
   }
 

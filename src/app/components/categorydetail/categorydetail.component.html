@@ -1,29 +1,37 @@
 <div class="container-fluid text-center" style="margin-left: 3%">
-  <div class="row">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-4" style="margin-top: 1%">
-      <h5>
-        <b>{{ categoryName }}</b>
-      </h5>
+  <mat-spinner
+    *ngIf="loading"
+    [diameter]="40"
+    color="accent"
+    style="margin-left: auto; margin-right: auto; margin-top: 20%"
+  ></mat-spinner>
+  <div *ngIf="!loading">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-4" style="margin-top: 1%">
+        <h5>
+          <b>{{ categoryName }}</b>
+        </h5>
+      </div>
+      <div class="col-lg-6">
+        <mat-form-field appearance="outline" style="font-size: 12px">
+          <mat-label>Sort by:</mat-label>
+          <mat-select disableOptionCentering="true">
+            <mat-option
+              *ngFor="let option of sortOptions"
+              [value]="option"
+              (onSelectionChange)="sortProducts(option, $event)"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-    <div class="col-lg-6">
-      <mat-form-field appearance="outline" style="font-size: 12px">
-        <mat-label>Sort by:</mat-label>
-        <mat-select disableOptionCentering="true">
-          <mat-option
-            *ngFor="let option of sortOptions"
-            [value]="option"
-            (onSelectionChange)="sortProducts(option, $event)"
-          >
-            {{ option }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="row" style="margin: 10px 0px 10px 5%">
-    <div class="col-lg-4" *ngFor="let product of sortedProducts">
-      <app-product [product]="product"></app-product>
+    <div class="row" style="margin: 10px 0px 10px 5%">
+      <div class="col-lg-4" *ngFor="let product of sortedProducts">
+        <app-product [product]="product"></app-product>
+      </div>
     </div>
   </div>
 </div>
